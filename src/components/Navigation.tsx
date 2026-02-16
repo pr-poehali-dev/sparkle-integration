@@ -1,5 +1,6 @@
 import { ShinyButton } from "@/components/ui/shiny-button"
 import { motion } from "framer-motion"
+import Icon from "@/components/ui/icon"
 
 export function Navigation() {
   return (
@@ -13,25 +14,28 @@ export function Navigation() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
             <a href="/" className="text-xl font-bold font-display">
-              LaunchPad
+              Дом Мечты
             </a>
             <div className="hidden md:flex items-center gap-6">
-              <a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Возможности
+              <a href="#projects" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Проекты
               </a>
-              <a href="#pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Тарифы
+              <a href="#calculator" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Калькулятор
               </a>
-              <a href="#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                О нас
+              <a href="#ready-houses" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Готовые дома
+              </a>
+              <a href="#testimonials" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Отзывы
               </a>
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <ShinyButton variant="secondary" className="hidden sm:inline-flex">
-              Войти
+            <ShinyButton>
+              <Icon name="Phone" size={16} className="mr-2 inline-block" />
+              Позвонить
             </ShinyButton>
-            <ShinyButton>Начать</ShinyButton>
           </div>
         </div>
       </div>

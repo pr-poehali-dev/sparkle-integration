@@ -15,38 +15,38 @@ export default function Index() {
       <main>
         <HeroSection />
         <SocialProof />
+        <FeaturesSlideshowSection />
+        <PricingSection />
         <FeaturesSection />
         <HowItWorksSection />
-        <FeaturesSlideshowSection />
         <TestimonialsSection />
-        <PricingSection />
         <FAQSection />
       </main>
       <footer className="border-t border-border py-12 mt-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <h3 className="font-bold mb-4">LaunchPad</h3>
+              <h3 className="font-bold mb-4">Дом Мечты</h3>
               <p className="text-sm text-muted-foreground">
-                Строим будущее продуктивности с помощью ИИ-инструментов.
+                Строим дома мечты с 2013 года. Качество, которому доверяют.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Продукт</h4>
+              <h4 className="font-semibold mb-4">Услуги</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <a href="#" className="hover:text-foreground transition-colors">
-                    Возможности
+                    Каркасные дома
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-foreground transition-colors">
-                    Тарифы
+                    Кирпичные дома
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-foreground transition-colors">
-                    Безопасность
+                    Отделка под ключ
                   </a>
                 </li>
               </ul>
@@ -61,39 +61,37 @@ export default function Index() {
                 </li>
                 <li>
                   <a href="#" className="hover:text-foreground transition-colors">
-                    Блог
+                    Наши работы
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-foreground transition-colors">
-                    Вакансии
+                    Отзывы
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Документы</h4>
+              <h4 className="font-semibold mb-4">Контакты</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <a href="#" className="hover:text-foreground transition-colors">
-                    Конфиденциальность
+                  <a href="tel:+79991234567" className="hover:text-foreground transition-colors">
+                    +7 (999) 123-45-67
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-foreground transition-colors">
-                    Условия
+                  <a href="mailto:info@dom-mechty.ru" className="hover:text-foreground transition-colors">
+                    info@dom-mechty.ru
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-foreground transition-colors">
-                    Контакты
-                  </a>
+                  <span>Московская область</span>
                 </li>
               </ul>
             </div>
           </div>
           <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">
-            &copy; 2025 LaunchPad. Все права защищены.
+            &copy; 2025 Дом Мечты. Все права защищены.
           </div>
         </div>
       </footer>

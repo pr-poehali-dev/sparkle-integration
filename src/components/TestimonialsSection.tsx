@@ -3,58 +3,58 @@ import { TestimonialsColumn } from "@/components/ui/testimonials-column"
 
 const testimonials = [
   {
-    text: "Платформа произвела революцию в наших операциях, оптимизировала рабочие процессы и повысила продуктивность. Интуитивный интерфейс поддерживает эффективность команды.",
-    image: "https://randomuser.me/api/portraits/women/1.jpg",
-    name: "Анна Петрова",
-    role: "Директор по операциям",
+    text: "Построили дом за 4 месяца, как и обещали. Качество на высоте, бригада работала аккуратно. Рекомендую!",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    name: "Алексей Петров",
+    role: "Дом 120 м², Московская обл.",
   },
   {
-    text: "Внедрение прошло гладко, а результаты были мгновенными. Команда быстро адаптировалась благодаря удобному дизайну.",
-    image: "https://randomuser.me/api/portraits/men/2.jpg",
-    name: "Михаил Родригес",
-    role: "IT-менеджер",
+    text: "Долго выбирали подрядчика и не пожалели что остановились на «Дом Мечты». Всё прозрачно, никаких скрытых доплат.",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    name: "Мария Сидорова",
+    role: "Дом 95 м², Тульская обл.",
   },
   {
-    text: "Команда поддержки великолепна. Они сопровождали нас на каждом этапе и продолжают оказывать исключительную помощь.",
-    image: "https://randomuser.me/api/portraits/women/3.jpg",
-    name: "Елена Васильева",
-    role: "Руководитель успеха клиентов",
+    text: "Отличная команда! Помогли с выбором проекта, адаптировали под наш участок. Дом получился теплый и уютный.",
+    image: "https://randomuser.me/api/portraits/men/22.jpg",
+    name: "Дмитрий Козлов",
+    role: "Дом 145 м², Калужская обл.",
   },
   {
-    text: "Это решение изменило то, как мы работаем. Бесшовная интеграция и мощные функции превзошли наши ожидания.",
-    image: "https://randomuser.me/api/portraits/men/4.jpg",
-    name: "Дмитрий Ким",
-    role: "Генеральный директор",
+    text: "Строили в рассрочку — очень удобно. Качество материалов отличное, всё по договору.",
+    image: "https://randomuser.me/api/portraits/women/28.jpg",
+    name: "Елена Новикова",
+    role: "Дом 80 м², Владимирская обл.",
   },
   {
-    text: "Надежные функции и отзывчивая поддержка сделали наш рабочий процесс значительно более эффективным и упорядоченным.",
-    image: "https://randomuser.me/api/portraits/women/5.jpg",
-    name: "Юлия Мартинес",
-    role: "Проект-менеджер",
+    text: "Второй раз обращаемся в «Дом Мечты». Первый дом для себя, второй для родителей. Всем довольны!",
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
+    name: "Сергей Волков",
+    role: "Дом 110 м², Рязанская обл.",
   },
   {
-    text: "Внедрение превзошло ожидания. Оно оптимизировало процессы и значительно улучшило общую эффективность бизнеса.",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
-    name: "Алиса Фостер",
-    role: "Бизнес-аналитик",
+    text: "Понравился профессиональный подход. Прораб всегда на связи, все вопросы решались оперативно.",
+    image: "https://randomuser.me/api/portraits/women/33.jpg",
+    name: "Ольга Морозова",
+    role: "Дом 130 м², Тверская обл.",
   },
   {
-    text: "Удобный дизайн и мощные возможности изменили то, как наша команда сотрудничает и достигает результатов.",
-    image: "https://randomuser.me/api/portraits/men/7.jpg",
-    name: "Артем Волков",
-    role: "Директор по маркетингу",
+    text: "Смета не изменилась ни на рубль за время строительства. Это большая редкость в наше время.",
+    image: "https://randomuser.me/api/portraits/men/55.jpg",
+    name: "Андрей Кузнецов",
+    role: "Дом 160 м², Ярославская обл.",
   },
   {
-    text: "Они предоставили решение, которое действительно поняло наши потребности и улучшило работу сверх того, что мы могли представить.",
-    image: "https://randomuser.me/api/portraits/women/8.jpg",
-    name: "Рита Томпсон",
-    role: "Менеджер по продажам",
+    text: "Дом простоял первую зиму — тепло, никаких проблем. Спасибо команде за качественную работу!",
+    image: "https://randomuser.me/api/portraits/women/65.jpg",
+    name: "Наталья Белова",
+    role: "Дом 100 м², Смоленская обл.",
   },
   {
-    text: "Наша продуктивность и эффективность резко возросли. Эта платформа стала незаменимой для повседневной работы.",
-    image: "https://randomuser.me/api/portraits/men/9.jpg",
-    name: "Даниил Парк",
-    role: "Операционный менеджер",
+    text: "Выбрали проект из каталога, немного доработали планировку. Результат превзошел ожидания!",
+    image: "https://randomuser.me/api/portraits/men/28.jpg",
+    name: "Игорь Лебедев",
+    role: "Дом 175 м², Московская обл.",
   },
 ]
 
@@ -64,7 +64,7 @@ const thirdColumn = testimonials.slice(6, 9)
 
 export function TestimonialsSection() {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden" id="testimonials">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -78,9 +78,9 @@ export function TestimonialsSection() {
           </div>
 
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mt-5 text-center">
-            Что говорят клиенты
+            Что говорят наши клиенты
           </h2>
-          <p className="text-center mt-5 text-muted-foreground">Узнайте, что наши клиенты говорят о нас.</p>
+          <p className="text-center mt-5 text-muted-foreground">Более 350 семей уже живут в домах, построенных нами</p>
         </motion.div>
 
         <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
