@@ -1,0 +1,3 @@
+# sparkle-integration
+
+Initial repository setup for pr-poehali-dev/sparkle-integration
