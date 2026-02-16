@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Icon from "@/components/ui/icon"
@@ -20,45 +20,40 @@ const readyHouses = [
   { id: 4, name: "Дом во Владимире", houseArea: 80, landArea: 6, price: "5 100 000 ₽", image: "/placeholder.svg" },
 ]
 
+const slideVariants = {
+  enter: (direction: number) => ({ x: direction > 0 ? 300 : -300, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (direction: number) => ({ x: direction > 0 ? -300 : 300, opacity: 0 }),
+}
+
 export function FeaturesSlideshowSection() {
   const [projectIndex, setProjectIndex] = useState(0)
+  const [projectDir, setProjectDir] = useState(1)
   const [readyIndex, setReadyIndex] = useState(0)
-
-  const projectsPerPage = 3
+  const [readyDir, setReadyDir] = useState(1)
 
   const nextProject = () => {
+    setProjectDir(1)
     setProjectIndex((prev) => (prev + 1) % projects.length)
   }
 
   const prevProject = () => {
+    setProjectDir(-1)
     setProjectIndex((prev) => (prev - 1 + projects.length) % projects.length)
   }
 
-  const getVisibleProjects = () => {
-    const visible = []
-    for (let i = 0; i < projectsPerPage; i++) {
-      visible.push(projects[(projectIndex + i) % projects.length])
-    }
-    return visible
-  }
-
-  const readyPerPage = 3
-
   const nextReady = () => {
+    setReadyDir(1)
     setReadyIndex((prev) => (prev + 1) % readyHouses.length)
   }
 
   const prevReady = () => {
+    setReadyDir(-1)
     setReadyIndex((prev) => (prev - 1 + readyHouses.length) % readyHouses.length)
   }
 
-  const getVisibleReady = () => {
-    const visible = []
-    for (let i = 0; i < readyPerPage; i++) {
-      visible.push(readyHouses[(readyIndex + i) % readyHouses.length])
-    }
-    return visible
-  }
+  const project = projects[projectIndex]
+  const house = readyHouses[readyIndex]
 
   return (
     <>
@@ -69,55 +64,47 @@ export function FeaturesSlideshowSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex items-start justify-between mb-12"
+            className="text-center mb-12"
           >
-            <div>
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-balance max-w-2xl">
-                Каталог проектов
-              </h2>
-              <p className="text-lg text-muted-foreground mt-4 max-w-xl">
-                Выберите проект дома или адаптируем любой вариант под ваши пожелания
-              </p>
-            </div>
-            <div className="flex gap-2 flex-shrink-0">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={prevProject}
-                className="rounded-full h-12 w-12 bg-muted hover:bg-muted/80"
-              >
-                <Icon name="ChevronLeft" size={20} />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={nextProject}
-                className="rounded-full h-12 w-12 bg-muted hover:bg-muted/80"
-              >
-                <Icon name="ChevronRight" size={20} />
-              </Button>
-            </div>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-balance">
+              Каталог проектов
+            </h2>
+            <p className="text-lg text-muted-foreground mt-4 max-w-xl mx-auto">
+              Выберите проект дома или адаптируем любой вариант под ваши пожелания
+            </p>
           </motion.div>
 
-          <div className="relative overflow-hidden">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {getVisibleProjects().map((project) => (
+          <div className="flex items-center justify-center gap-6 max-w-2xl mx-auto">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={prevProject}
+              className="rounded-full h-14 w-14 bg-muted hover:bg-muted/80 flex-shrink-0"
+            >
+              <Icon name="ChevronLeft" size={24} />
+            </Button>
+
+            <div className="flex-1 overflow-hidden relative min-h-[420px]">
+              <AnimatePresence mode="wait" custom={projectDir}>
                 <motion.div
-                  key={`project-${project.id}-${projectIndex}`}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4 }}
+                  key={project.id}
+                  custom={projectDir}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
                 >
-                  <Card className="overflow-hidden group hover:border-primary/50 transition-colors">
+                  <Card className="overflow-hidden hover:border-primary/50 transition-colors">
                     <div className="relative bg-muted/50">
                       <img
                         src={project.image}
                         alt={project.name}
-                        className="w-full h-[240px] object-cover"
+                        className="w-full h-[260px] object-cover"
                       />
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-display font-bold mb-3">{project.name}</h3>
+                      <h3 className="text-2xl font-display font-bold mb-4">{project.name}</h3>
                       <div className="grid grid-cols-3 gap-3 mb-4">
                         <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
                           <Icon name="Maximize2" size={14} className="text-primary" />
@@ -134,20 +121,32 @@ export function FeaturesSlideshowSection() {
                       </div>
                       <div className="flex items-center justify-between pt-3 border-t border-border">
                         <span className="text-sm text-muted-foreground">от</span>
-                        <span className="text-lg font-bold text-primary">{project.price}</span>
+                        <span className="text-xl font-bold text-primary">{project.price}</span>
                       </div>
                     </div>
                   </Card>
                 </motion.div>
-              ))}
+              </AnimatePresence>
             </div>
+
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={nextProject}
+              className="rounded-full h-14 w-14 bg-muted hover:bg-muted/80 flex-shrink-0"
+            >
+              <Icon name="ChevronRight" size={24} />
+            </Button>
           </div>
 
           <div className="flex justify-center gap-2 mt-8">
             {projects.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setProjectIndex(idx)}
+                onClick={() => {
+                  setProjectDir(idx > projectIndex ? 1 : -1)
+                  setProjectIndex(idx)
+                }}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   idx === projectIndex ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
                 }`}
@@ -165,86 +164,88 @@ export function FeaturesSlideshowSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex items-start justify-between mb-12"
+            className="text-center mb-12"
           >
-            <div>
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-balance max-w-2xl">
-                Готовые дома
-              </h2>
-              <p className="text-lg text-muted-foreground mt-4 max-w-xl">
-                Дома с участками, готовые к заселению. Заезжайте и живите уже сегодня
-              </p>
-            </div>
-            <div className="flex gap-2 flex-shrink-0">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={prevReady}
-                className="rounded-full h-12 w-12 bg-muted hover:bg-muted/80"
-              >
-                <Icon name="ChevronLeft" size={20} />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={nextReady}
-                className="rounded-full h-12 w-12 bg-muted hover:bg-muted/80"
-              >
-                <Icon name="ChevronRight" size={20} />
-              </Button>
-            </div>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-balance">
+              Готовые дома
+            </h2>
+            <p className="text-lg text-muted-foreground mt-4 max-w-xl mx-auto">
+              Дома с участками, готовые к заселению. Заезжайте и живите уже сегодня
+            </p>
           </motion.div>
 
-          <div className="relative overflow-hidden">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {getVisibleReady().map((house) => (
+          <div className="flex items-center justify-center gap-6 max-w-2xl mx-auto">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={prevReady}
+              className="rounded-full h-14 w-14 bg-muted hover:bg-muted/80 flex-shrink-0"
+            >
+              <Icon name="ChevronLeft" size={24} />
+            </Button>
+
+            <div className="flex-1 overflow-hidden relative min-h-[420px]">
+              <AnimatePresence mode="wait" custom={readyDir}>
                 <motion.div
-                  key={`ready-${house.id}-${readyIndex}`}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4 }}
+                  key={house.id}
+                  custom={readyDir}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
                 >
-                  <Card className="overflow-hidden group hover:border-primary/50 transition-colors">
+                  <Card className="overflow-hidden hover:border-primary/50 transition-colors">
                     <div className="relative bg-muted/50">
                       <img
                         src={house.image}
                         alt={house.name}
-                        className="w-full h-[240px] object-cover"
+                        className="w-full h-[260px] object-cover"
                       />
-                      <div className="absolute top-3 left-3">
-                        <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                          Готов к заселению
-                        </span>
-                      </div>
+                      <span className="absolute top-4 left-4 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        Готов к заселению
+                      </span>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-display font-bold mb-3">{house.name}</h3>
-                      <div className="grid grid-cols-2 gap-3 mb-4">
-                        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                          <Icon name="Home" size={14} className="text-primary" />
-                          <span>{house.houseArea} м²</span>
+                      <h3 className="text-2xl font-display font-bold mb-4">{house.name}</h3>
+                      <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Icon name="Home" size={16} className="text-primary" />
+                          <span>Дом {house.houseArea} м²</span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                          <Icon name="TreePine" size={14} className="text-primary" />
-                          <span>{house.landArea} соток</span>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Icon name="TreePine" size={16} className="text-primary" />
+                          <span>Участок {house.landArea} сот.</span>
                         </div>
                       </div>
                       <div className="flex items-center justify-between pt-3 border-t border-border">
-                        <span className="text-sm text-muted-foreground">Цена с участком</span>
-                        <span className="text-lg font-bold text-primary">{house.price}</span>
+                        <span className="text-sm text-muted-foreground">дом + участок</span>
+                        <span className="text-xl font-bold text-primary">{house.price}</span>
                       </div>
                     </div>
                   </Card>
                 </motion.div>
-              ))}
+              </AnimatePresence>
             </div>
+
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={nextReady}
+              className="rounded-full h-14 w-14 bg-muted hover:bg-muted/80 flex-shrink-0"
+            >
+              <Icon name="ChevronRight" size={24} />
+            </Button>
           </div>
 
           <div className="flex justify-center gap-2 mt-8">
             {readyHouses.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setReadyIndex(idx)}
+                onClick={() => {
+                  setReadyDir(idx > readyIndex ? 1 : -1)
+                  setReadyIndex(idx)
+                }}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   idx === readyIndex ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
                 }`}
